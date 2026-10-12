@@ -1,0 +1,26 @@
+name: 膝コゾ・21時通知
+
+on:
+  schedule:
+    - cron: '0 21 * * *'
+      timezone: 'Asia/Tokyo'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  send-notification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install web push library
+        run: npm install --omit=dev --no-audit --no-fund
+      - name: Send 膝コゾ
+        env:
+          PUSH_CONFIG: ${{ secrets.PUSH_CONFIG }}
+        run: node scripts/send-reminder.mjs
