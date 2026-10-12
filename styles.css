@@ -166,3 +166,14 @@ button { font: inherit; }
   .reset-button { min-height: 44px; padding: 7px 13px; font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+
+/* 通知設定：上下2つのタップ領域を維持した小さな独立リンク */
+.reminder-button {
+  position: absolute; z-index: 3; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right));
+  display: grid; place-items: center; width: 48px; height: 48px;
+  color: #d5e5ff; background: rgba(10, 22, 43, .62);
+  border: 1px solid rgba(194, 219, 255, .24); border-radius: 16px;
+  text-decoration: none; backdrop-filter: blur(12px); touch-action: manipulation;
+}
+.reminder-button:active { background: rgba(63, 94, 140, .68); }
+.reminder-button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }

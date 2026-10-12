@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101a31">
+  <meta name="color-scheme" content="dark">
+  <title>膝コゾ通知の設定</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./reminder.css">
+  <script src="./reminder.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <a class="back" href="./" aria-label="ストップウォッチに戻る">← ストップウォッチ</a>
+    <div class="headline-icon" aria-hidden="true">♧</div>
+    <div class="eyebrow">DAILY REMINDER</div>
+    <h1>膝コゾ</h1>
+    <p class="time">毎日 <strong>21:00</strong> <span>日本時間</span></p>
+    <p class="intro">アプリを閉じていても受信できるプッシュ通知です。GitHub Actionsから送ります。</p>
+
+    <section class="card">
+      <p class="step">STEP 1 / スマホの通知登録</p>
+      <h2>この端末で通知を許可</h2>
+      <p class="help">このアプリを入れたAndroidスマホで押してください。通知の許可画面が表示されます。</p>
+      <button type="button" id="enable" class="primary">通知登録を作成</button>
+      <div id="status" role="status" aria-live="polite">未設定</div>
+    </section>
+
+    <section class="card">
+      <p class="step">STEP 2 / GitHubの設定</p>
+      <h2>通知登録情報をコピー</h2>
+      <p class="help">作成後にコピーし、GitHubリポジトリの <code>Settings → Secrets and variables → Actions → New repository secret</code> に登録します。</p>
+      <div class="secret-line"><span>Secret name</span><code>PUSH_CONFIG</code></div>
+      <button type="button" id="copy" class="secondary" disabled>登録情報をコピー</button>
+      <textarea id="fallback" readonly hidden aria-label="GitHubに貼り付ける通知登録情報"></textarea>
+      <p class="warning">コピーした情報には秘密鍵が含まれます。GitHubの通常ファイル、README、Issue、公開チャットには貼らず、必ずRepository secretに保存してください。</p>
+    </section>
+
+    <section class="card">
+      <p class="step">STEP 3 / 届くか確認</p>
+      <h2>通知をテストする</h2>
+      <button type="button" id="test" class="secondary" disabled>この端末にテスト表示</button>
+      <p class="help small">このボタンは端末での通知表示だけを確認します。実際の配信確認はGitHubの「Actions → 膝コゾ・21時通知 → Run workflow」で行ってください。</p>
+    </section>
+
+    <section class="card subdued">
+      <h2>設定をやり直す場合</h2>
+      <p class="help">「通知登録を作成」を再度押すと、既存の登録情報はそのまま再表示します。端末変更・登録エラーがある場合は登録を解除してから作り直し、GitHubのSecretも上書きしてください。</p>
+      <button type="button" id="disable" class="subtle">この端末の通知登録を解除</button>
+    </section>
+    <p class="foot">GitHub Actionsは21時ちょうどの実行を保証しません。Publicリポジトリは約60日間更新がないと定期実行が自動停止することがあります。</p>
+  </main>
+</body>
+</html>
