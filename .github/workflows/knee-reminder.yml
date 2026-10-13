@@ -2,7 +2,7 @@ name: 膝コゾ・21時通知
 
 on:
   schedule:
-    - cron: '0 21 * * *'
+    - cron: '7 21 * * *'
       timezone: 'Asia/Tokyo'
   workflow_dispatch:
 
