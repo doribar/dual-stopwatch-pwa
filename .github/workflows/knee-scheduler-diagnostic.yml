@@ -1,0 +1,26 @@
+name: 膝コゾ・定期実行診断
+
+on:
+  schedule:
+    # Diagnostic only: 21:23 and 21:43 JST (12:23 / 12:43 UTC).
+    # This workflow does NOT send push notifications.
+    - cron: '23,43 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose-scheduler:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Print scheduler trigger details
+        env:
+          TRIGGER: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          echo "Trigger: $TRIGGER"
+          echo "Cron: $SCHEDULE"
+          echo "UTC time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "Diagnostic only - no push notification sent"
