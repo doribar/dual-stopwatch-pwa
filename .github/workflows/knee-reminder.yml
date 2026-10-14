@@ -2,8 +2,8 @@ name: 膝コゾ・21時通知
 
 on:
   schedule:
-    - cron: '7 21 * * *'
-      timezone: 'Asia/Tokyo'
+    # 12:07 UTC = 21:07 Japan Standard Time (UTC+9)
+    - cron: '7 12 * * *'
   workflow_dispatch:
 
 permissions:
